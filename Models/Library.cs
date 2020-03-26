@@ -24,9 +24,9 @@ namespace webapi_library.Models
     {
       Name = name;
       Address = address;
+      Id = Guid.NewGuid().ToString();
       _books = new List<Book>();
       _checkedOut = new List<Book>();
-      Id = Guid.NewGuid().ToString();
     }
   }
 

@@ -11,7 +11,7 @@ namespace webapi_library.Controllers
   public class LibrariesController : ControllerBase
   {
     [HttpGet]
-    public ActionResult<IEnumerable<Library>> Get()
+    public ActionResult<IEnumerable<Library>> Read()
     {
       try
       {
@@ -23,7 +23,7 @@ namespace webapi_library.Controllers
       }
     }
     [HttpPost]
-    public ActionResult<Library> Post([FromBody] Library newLibrary)
+    public ActionResult<Library> Create([FromBody] Library newLibrary)
     {
       try
       {
@@ -35,7 +35,43 @@ namespace webapi_library.Controllers
         return BadRequest(e.Message);
       }
     }
-
+    [HttpPut("{id}")]
+    public ActionResult<Library> Update(string id, [FromBody] Library updatedLibrary)
+    {
+      try
+      {
+        Library libraryToUpdate = FakeDB.libraries.Find(l => l.Id == id);
+        if (libraryToUpdate == null)
+        {
+          throw new Exception();
+        }
+        libraryToUpdate.Name = updatedLibrary.Name;
+        libraryToUpdate.Address = updatedLibrary.Address;
+        return Ok(libraryToUpdate);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(string id)
+    {
+      try
+      {
+        Library libraryToDelete = FakeDB.libraries.Find(l => l.Id == id);
+        if (libraryToDelete == null)
+        {
+          throw new Exception("Bad ID");
+        }
+        FakeDB.libraries.Remove(libraryToDelete);
+        return Ok("Successfully Removed");
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
 
 
 

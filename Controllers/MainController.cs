@@ -20,7 +20,7 @@ namespace webapi_library.Controllers
     }
     private void GetUserInput()
     {
-      System.Console.WriteLine("Please press (v)iew books, (c)heckout book, or (q)uit");
+      System.Console.WriteLine("Please press (v)iew books, (c)heckout book, (r)return or (q)uit");
       string input = Console.ReadLine().Trim().ToLower();
       switch (input)
       {
@@ -35,13 +35,18 @@ namespace webapi_library.Controllers
           break;
         case "c":
         case "checkout":
-          _ls.Checkout();
+          Console.WriteLine("What book would you like to checkout?");
+          string selection = Console.ReadLine().Trim().ToLower();
+          _ls.Checkout(selection);
           break;
+        case "r":
+        case "return":
+
         default:
           _ls.AddItemToMessages();
           break;
       }
-      Console.Clear();
+      // Console.Clear();
     }
     private void Print()
     {

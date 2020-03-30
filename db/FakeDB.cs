@@ -10,6 +10,7 @@ namespace webapi_library.DB
     public static List<Library> libraries = new List<Library>(){
     new Library("Adrian", "311 Main St 97901")};
     public static List<Book> books = new List<Book>(){
-    new Book("The Wild West", "Mr. Teacher")};
+    new Book("The Wild West", "Mr. Teacher"),
+    new Book("Not Available", "Mr. T")};
   }
 }
